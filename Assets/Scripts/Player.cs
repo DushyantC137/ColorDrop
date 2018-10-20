@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,8 +13,7 @@ public class Player : MonoBehaviour
     public Color blue;
     public Color red;
     public Color pink;
-    public GameObject locationObject;
-    Vector2 locationVector; 
+    public GameObject Camera;
     // Use this for initialization
     
     void Start()
@@ -29,7 +28,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        locationVector = locationObject.transform.position;
         if (!GameOver)
         {
             if (Input.GetButtonDown("Jump") || Input.GetMouseButtonDown(0))
@@ -58,6 +56,8 @@ public class Player : MonoBehaviour
      //Wrong Color
             Debug.Log("GameOver");
             Destroy(player);
+            Camera.GetComponent<Animator>().Play("CameraShake");
+            
         }
      //Color Switch
 
@@ -102,6 +102,6 @@ public class Player : MonoBehaviour
     {
         rb.gravityScale = 0;
         rb.velocity = new Vector2(0,0);
-        player.transform.position = locationVector;
+       
     }
 }
