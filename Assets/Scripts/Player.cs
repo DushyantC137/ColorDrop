@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour
     public Color red;
     public Color pink;
     public GameObject Camera;
+    public float gRaviTy;
     // Use this for initialization
     
     void Start()
@@ -33,7 +35,7 @@ public class Player : MonoBehaviour
             if (Input.GetButtonDown("Jump") || Input.GetMouseButtonDown(0))
             {
                // Debug.Log("click");
-                rb.gravityScale = 2f;
+                rb.gravityScale = gRaviTy;
                // Debug.Log("thisColor=" + this.thisColor);
             }
 
@@ -46,6 +48,7 @@ public class Player : MonoBehaviour
         if (col.tag==this.thisColor)
         {
             Debug.Log("coltag " + col.tag + " thiscolor "+thisColor);
+            
             DestroyVillian();
             StopPlayer();
 
@@ -56,6 +59,7 @@ public class Player : MonoBehaviour
      //Wrong Color
             Debug.Log("GameOver");
             Destroy(player);
+            SceneManager.LoadScene(0);
             Camera.GetComponent<Animator>().Play("CameraShake");
             
         }
@@ -97,6 +101,7 @@ public class Player : MonoBehaviour
         Debug.Log("Destroyed");
         Destroy(GameObject.FindWithTag("villian"));
     }
+
     
     public void StopPlayer()
     {
